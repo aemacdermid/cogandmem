@@ -50,7 +50,7 @@ def list_or_tuple(f, w, sep = "\n", c = True, end_string = "\n"):
         end_string: a string to write at the end; defaults to "\n".
     """
     f = ready_file_for_writing(f)
-    for i in xrange(len(w)):
+    for i in range(len(w)):
         e = w[i]
         if isinstance(e, (list, tuple)):
             list_or_tuple(f, e, c = False, end_string = "")
@@ -130,7 +130,7 @@ def study_phase(stimuli, f, sep = ",", close_when_finished = True):
     else:
         write_condition = False
         f.write("\n")
-    for i in xrange(len(stimuli)):
+    for i in range(len(stimuli)):
         f.write("{:d}{:s}{:s}".format(i+1, sep, stimuli[i].word))
         if write_condition:
             f.write("{:s}{:s}\n".format(sep, str(stimuli[i].condition)))
@@ -172,7 +172,7 @@ def paired_study(stimuli, f, sep = ",", close_when_finished = True):
     else:
         write_condition = False
         f.write("\n")
-    for i in xrange(len(stimuli)):
+    for i in range(len(stimuli)):
         pair = stimuli[i]
         f.write(str(i+1)+sep+pair.cue+sep+pair.target)
         if write_condition:
@@ -215,7 +215,7 @@ def cued_recall_results(word_pairs, f, sep = ",", close_when_finished = True):
     else:
         write_condition = False
         f.write("\n")
-    for i in xrange(len(word_pairs)):
+    for i in range(len(word_pairs)):
         pair = word_pairs[i]
         f.write(str(i+1)+sep+pair.cue+sep+pair.target+sep+pair.response)
         if write_condition:

@@ -83,9 +83,9 @@ import time
 import pygame
 from pygame.locals import *
 
-import experiment
-import text
-import generic
+from cogandmem import experiment
+from cogandmem import text
+from cogandmem import generic
 
 
 # Game Constants:
@@ -377,8 +377,8 @@ class Piece:
     
     def add_to_board(self, b):
         """Add the Piece object to the game board (b)."""
-        for x in xrange(TEMPLATE_WIDTH):
-            for y in xrange(TEMPLATE_HEIGHT):
+        for x in range(TEMPLATE_WIDTH):
+            for y in range(TEMPLATE_HEIGHT):
                 # Check if this x-y coordinate needs colour:
                 if PIECES[self.shape][self.orientation][y][x] != BLANK:
                     b.state[x+self.x][y+self.y] = self.colour
@@ -386,8 +386,8 @@ class Piece:
     def is_valid_position(self, b, x_adjustment = 0, y_adjustment = 0):
         """Return True if a Piece's location is valid."""
         valid = True
-        for x in xrange(TEMPLATE_WIDTH):
-            for y in xrange(TEMPLATE_HEIGHT):
+        for x in range(TEMPLATE_WIDTH):
+            for y in range(TEMPLATE_HEIGHT):
                 is_above_board = y+self.y+y_adjustment < 0
                 if is_above_board or PIECES[self.shape][self.orientation][y][x] == BLANK:
                     continue
@@ -444,7 +444,7 @@ class Piece:
     
     def move_to_bottom(self, b):
         """Move the piece to the bottom of the game board (b)."""
-        for i in xrange(1, b.rows):
+        for i in range(1, b.rows):
             if not self.legal_down(b):
                 # The ith row is blocked.
                 break
@@ -492,8 +492,8 @@ class Piece:
             # Convert to pixels:
             x_coord, y_coord = b.board_to_pixels(x_coord, y_coord)
         shape_to_draw = PIECES[self.shape][self.orientation]
-        for x in xrange(TEMPLATE_WIDTH):
-            for y in xrange(TEMPLATE_HEIGHT):
+        for x in range(TEMPLATE_WIDTH):
+            for y in range(TEMPLATE_HEIGHT):
                 if shape_to_draw[y][x] != BLANK:
                     b.draw_box(
                         x_coord+x*b.cell_size, y_coord+y*b.cell_size,
@@ -559,7 +559,7 @@ class GameBoard:
         self.columns = 10
         self.rows = 20
         self.state = []
-        for x in xrange(columns):
+        for x in range(columns):
             column = [BLANK]*rows
             self.state.append(column)
         self.left = left
@@ -569,7 +569,7 @@ class GameBoard:
     def reset(self):
         """Reset the game board."""
         self.state = []
-        for x in xrange(self.columns):
+        for x in range(self.columns):
             column = [BLANK]*self.rows
             self.state.append(column)
     
@@ -581,7 +581,7 @@ class GameBoard:
     
     def is_complete_line(self, y):
         """Return True if Row y is a complete line and False otherwise."""
-        for x in xrange(self.columns):
+        for x in range(self.columns):
             current_cell = self.state[x][y]
             if current_cell == BLANK:
                 # The line is not complete.
@@ -598,11 +598,11 @@ class GameBoard:
         while y >= 0:
             if self.is_complete_line(y):
                 # Remove the complete line and pull higher lines down a row:
-                for pull_down_y in xrange(y, 0, -1):
-                    for x in xrange(self.columns):
+                for pull_down_y in range(y, 0, -1):
+                    for x in range(self.columns):
                         self.state[x][pull_down_y] = self.state[x][pull_down_y-1]
                 # Set very top line to blank:
-                for x in xrange(self.columns):
+                for x in range(self.columns):
                     self.state[x][0] = BLANK
                 lines = lines+1
             else:
@@ -655,8 +655,8 @@ parameter must be "box" or "pixel".'
                 self.rows*self.cell_size+8
             ), 5
         )
-        for column in xrange(self.columns):
-            for row in xrange(self.rows):
+        for column in range(self.columns):
+            for row in range(self.rows):
                 self.draw_box(column, row, self.state[column][row])
 
 

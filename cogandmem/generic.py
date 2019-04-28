@@ -187,7 +187,7 @@ def date_time_string():
     date_and_time = ""
     # Convert ints to strings, add leading 0s if necessary, and then add to
     # date_and_time:
-    for i in xrange(6):
+    for i in range(6):
         if i < 5:
             unit_to_add = str(current_time[i])+"."
             if len(unit_to_add) == 2:

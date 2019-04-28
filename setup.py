@@ -18,14 +18,14 @@ setup(
     author_email = "tyler.ensor@mun.ca",
     classifiers = [
         "Intended Audience :: Science/Research",
-        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License"
     ],
     keywords = "psychology experiment memory cognition",
     packages = ["cogandmem"],
     install_requires = [
-        "numpy >= 1.7.0",
+        "numpy",
         "pygame"
     ],
     include_package_data = True

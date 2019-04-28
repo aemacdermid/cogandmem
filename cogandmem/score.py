@@ -79,7 +79,7 @@ def free_recall(targets, responses):
         try:
             conditions = []
             denominators = {}
-            for i in xrange(len(targets)):
+            for i in range(len(targets)):
                 target = targets[i]
                 current_condition = target.condition
                 targets_as_strings.append(target.word)

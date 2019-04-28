@@ -36,8 +36,8 @@ import sys
 import pygame
 from pygame.locals import *
 
-import experiment
-import generic
+from cogandmem import experiment
+from cogandmem import generic
 
 LETTERS = (
     K_a, K_b, K_c, K_d, K_e, K_f, K_g, K_h, K_i, K_j, K_k, K_l, K_m,

@@ -210,7 +210,7 @@ experimental_pairs = cogandmem.generic.convert_to_list(experimental_pairs)
 # cogandmem.experiment has a class called WordPair. The pairs in
 # experimental_pairs are made into WordPair objects next. A future version of
 # cogandmem should probably include a function to do this automatically.
-for i in xrange(len(experimental_pairs)):
+for i in range(len(experimental_pairs)):
     word1, word2 = experimental_pairs[i]
     # Overwrite the list of strings with a WordPair object:
     experimental_pairs[i] = cogandmem.experiment.WordPair(word1, word2, font)
@@ -224,8 +224,8 @@ long_study = experimental_pairs[SHORT_LENGTH:]
 # Instances of WordPair have a test attribute. Rather than copying the
 # WordPairs themselves to test lists, the test lists can be indices
 # referencing elements from the study lists.
-short_test = range(SHORT_LENGTH)
-long_test = range(LONG_LENGTH)
+short_test = list(range(SHORT_LENGTH))
+long_test = list(range(LONG_LENGTH))
 np.random.shuffle(short_test)
 np.random.shuffle(long_test)
 
@@ -265,7 +265,7 @@ for condition in ORDER:
                 bottom_message = CONTINUE_TEXT, advance_keys = ADVANCE_TUPLE,
                 frame_rate = FPS, quit_keys = QUIT_TUPLE
             )
-        for i in xrange(SHORT_LENGTH):
+        for i in range(SHORT_LENGTH):
             pair = short_study[i]
             # Call the study method of WordPair:
             pair.study(
@@ -341,7 +341,7 @@ for condition in ORDER:
                 bottom_message = CONTINUE_TEXT, advance_keys = ADVANCE_TUPLE,
                 frame_rate = FPS, quit_keys = QUIT_TUPLE
             )
-        for i in xrange(LONG_LENGTH):
+        for i in range(LONG_LENGTH):
             pair = long_study[i]
             pair.study(
                 STIM_DURATION, frame_rate = FPS, exit_keys = QUIT_TUPLE

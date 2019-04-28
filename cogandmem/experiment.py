@@ -40,11 +40,11 @@ import copy
 import pygame
 from pygame.locals import *
 
-import text
-import score
-import tetromino
-import writing
-import generic
+from cogandmem import text
+from cogandmem import score
+from cogandmem import tetromino
+from cogandmem import writing
+from cogandmem import generic
 
 
 BLACK = (0, 0, 0)
@@ -365,7 +365,7 @@ keys must be equal to the number of choices."
                 current_key = K_1
             else:
                 current_key = K_a
-            for i in xrange(choices):
+            for i in range(choices):
                 character = pygame.key.name(current_key)
                 if not numbers:
                     character = character.upper()
@@ -378,7 +378,7 @@ keys must be equal to the number of choices."
                 current_key = K_1
             else:
                 current_key = K_a
-            for i in xrange(choices):
+            for i in range(choices):
                 keys.append(current_key)
                 current_key = current_key+1
         self.keys = keys
@@ -1586,7 +1586,7 @@ def single_item_study_phase(stimuli, duration, isi, isi_fixation = "+", randomiz
             np.random.shuffle(locations)
     
     # Convert non-Stimulus objects to Stimulus objects:
-    for i in xrange(len(stimuli)):
+    for i in range(len(stimuli)):
         current_stim = stimuli[i]
         if not isinstance(current_stim, Stimulus):
             if fonts:
@@ -2009,7 +2009,7 @@ decreasing the font size."
     if data_file:
         data_file = writing.ready_file_for_writing(data_file)
         data_file.write("output_position,response\n")
-        for i in xrange(len(protocol)):
+        for i in range(len(protocol)):
             data_file.write("{:d},{:s}\n".format(i+1, protocol[i]))
         if close_data_file:
             data_file.close()
@@ -2261,7 +2261,7 @@ def free_recall(targets, stim_duration, isi_duration, study_instructions, test_i
         pass
     
     # Convert any non-Stimulus objects from targets to Stimulus objects:
-    for i in xrange(len(targets)):
+    for i in range(len(targets)):
         target = targets[i]
         if not isinstance(target, Stimulus):
             if stim_fonts:
@@ -2324,7 +2324,7 @@ targets_per_block must sum to the length of targets."
                 target_count = 0
                 for list_length in targets_per_block:
                     current_study_list = []
-                    for i in xrange(list_length):
+                    for i in range(list_length):
                         current_study_list.append(targets[target_count])
                         target_count = target_count+1
                     study_lists.append(current_study_list)
@@ -2333,9 +2333,9 @@ targets_per_block must sum to the length of targets."
 not evenly divide into the specified number of blocks."
                 list_length = len(targets)//blocks
                 target_count = 0
-                for i in xrange(blocks):
+                for i in range(blocks):
                     current_study_list = []
-                    for j in xrange(list_length):
+                    for j in range(list_length):
                         current_study_list.append(targets[j])
                     study_lists.append(current_study_list)
         else:
@@ -2359,11 +2359,11 @@ not evenly divide into the specified number of blocks."
 targets in each condition must evenly divide by the number of blocks."
                 # targets are deleted below, so create a copy:
                 targets_copy = copy_stimuli(targets)
-                for i in xrange(blocks):
+                for i in range(blocks):
                     current_study_list = []
                     for key in conditions:
                         to_delete_indices = []
-                        for j in xrange(len(targets_copy)):
+                        for j in range(len(targets_copy)):
                             target = targets_copy[j]
                             current_condition = target.condition
                             if isinstance(current_condition, list):
@@ -2373,7 +2373,7 @@ targets in each condition must evenly divide by the number of blocks."
                                 to_delete_indices.append(j)
                                 if len(to_delete_indices) == conditions[key]//blocks:
                                     break
-                        for k in xrange(len(to_delete_indices)-1, -1, -1):
+                        for k in range(len(to_delete_indices)-1, -1, -1):
                             index = to_delete_indices[k]
                             del targets_copy[index]
                     study_lists.append(current_study_list)
@@ -2384,7 +2384,7 @@ in targets_per_block must evenly divide by the number of conditions."
                     current_study_list = []
                     for key in conditions:
                         to_delete_indices = []
-                        for j in xrange(len(targets_copy)):
+                        for j in range(len(targets_copy)):
                             target = targets_copy[j]
                             current_condition = target.condition
                             if isinstance(current_condition, list):
@@ -2394,7 +2394,7 @@ in targets_per_block must evenly divide by the number of conditions."
                                 to_delete_indices.append(j)
                                 if len(to_delete_indices) == list_length%conditions:
                                     break
-                        for k in xrange(len(to_delete_indices)-1, -1, -1):
+                        for k in range(len(to_delete_indices)-1, -1, -1):
                             index = to_delete_indices[k]
                             del targets_copy[index]
                     study_lists.append(current_study_list)
@@ -2511,7 +2511,7 @@ in targets_per_block must evenly divide by the number of conditions."
         recall_responses.append(recall_responses_i)
     
     # Score results and fill the results list with dicts next.
-    for i in xrange(blocks):
+    for i in range(blocks):
         study_list = study_lists[i]
         response_list = recall_responses[i]
         dict_i = score.free_recall(study_list, response_list)
@@ -2524,7 +2524,7 @@ in targets_per_block must evenly divide by the number of conditions."
     if blocks > 1:
         all_stimuli = []
         all_responses = []
-        for i in xrange(blocks):
+        for i in range(blocks):
             all_stimuli = all_stimuli+study_lists[i]
             all_responses = all_responses+recall_responses[i]
         overall_dict = score.free_recall(all_stimuli, all_responses)
@@ -2535,7 +2535,7 @@ in targets_per_block must evenly divide by the number of conditions."
     # Write any requested data to files:
     if study_file:
         study_file = writing.ready_file_for_writing(study_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             study_file.write("Study list {:d} follows.\n".format(i+1))
             writing.study_phase(
                 study_list, study_file, close_when_finished = False
@@ -2544,13 +2544,13 @@ in targets_per_block must evenly divide by the number of conditions."
         study_file.close()
     
     if study_files:
-        for i in xrange(blocks):
+        for i in range(blocks):
             study_list = study_lists[i]
             writing.study_phase(study_list, study_files[i])
     
     if distractor_file and distractor:
         distractor_file = writing.ready_file_for_writing(distractor_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             distractor_file.write(
                 "For Block {:d}, this subject completed {:d} lines and lost \
 {:d} times.\n".format(
@@ -2560,7 +2560,7 @@ in targets_per_block must evenly divide by the number of conditions."
         distractor_file.close()
     
     if distractor_files and distractor:
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_file = writing.ready_file_for_writing(distractor_files[i])
             current_file.write(
                 "lines = {:d}\nlosses = {:d}".format(lines[i], losses[i])
@@ -2569,7 +2569,7 @@ in targets_per_block must evenly divide by the number of conditions."
     
     if protocol_file:
         protocol_file = writing.ready_file_for_writing(protocol_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             protocol = results[i][ITEMS_RECALLED]
             if protocol:
                 protocol_file.write(
@@ -2583,7 +2583,7 @@ in targets_per_block must evenly divide by the number of conditions."
         protocol_file.close()
     
     if protocol_files:
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_file = protocol_files[i]
             protocol = results[i][ITEMS_RECALLED]
             if protocol:
@@ -2595,7 +2595,7 @@ in targets_per_block must evenly divide by the number of conditions."
     
     if intrusion_file:
         intrusion_file = writing.ready_file_for_writing(intrusion_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_intrusions = results[i][INTRUSIONS]
             if current_intrusions:
                 intrusion_file.write(
@@ -2611,7 +2611,7 @@ in targets_per_block must evenly divide by the number of conditions."
         intrusion_file.close()
     
     if intrusion_files:
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_file = intrusion_files[i]
             current_intrusions = results[i][INTRUSIONS]
             if current_intrusions:
@@ -2623,7 +2623,7 @@ in targets_per_block must evenly divide by the number of conditions."
     
     if close_matches_file:
         close_matches_file = writing.ready_file_for_writing(close_matches_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             close_ones = results[i][CLOSE_MATCHES]
             if close_ones:
                 close_matches_file.write(
@@ -2631,7 +2631,7 @@ in targets_per_block must evenly divide by the number of conditions."
                 )
                 for key in close_ones:
                     close_matches_file.write(key+": ")
-                    for j in xrange(len(close_ones[key])):
+                    for j in range(len(close_ones[key])):
                         if j < len(close_ones[key])-1:
                             close_matches_file.write(close_ones[key][j]+", ")
                         else:
@@ -2643,14 +2643,14 @@ in targets_per_block must evenly divide by the number of conditions."
         close_matches_file.close()
     
     if close_matches_files:
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_file = close_matches_files[i]
             current_file = writing.ready_file_for_writing(current_file)
             close_ones = results[i][CLOSE_MATCHES]
             if close_ones:
                 for key in close_ones:
                     current_file.write("{:s}: ".format(key))
-                    for j in xrange(len(close_ones[key])):
+                    for j in range(len(close_ones[key])):
                         if j < len(close_ones[key])-1:
                             current_file.write(close_ones[key][j]+", ")
                         else:
@@ -2662,7 +2662,7 @@ in targets_per_block must evenly divide by the number of conditions."
     
     if results_file:
         results_file = writing.ready_file_for_writing(results_file)
-        for i in xrange(blocks):
+        for i in range(blocks):
             results_file.write("Block {:d}\n".format(i+1))
             writing.write_dict(results[i], results_file, False)
             results_file.write("\n\n")
@@ -2671,7 +2671,7 @@ in targets_per_block must evenly divide by the number of conditions."
             writing.write_dict(results[blocks], results_file)
     
     if results_files:
-        for i in xrange(blocks):
+        for i in range(blocks):
             current_file = results_files[i]
             writing.write_dict(results[i], current_file)
     return results
@@ -2735,10 +2735,10 @@ isn't adding up."
 doesn't add up in the relatedness_matrix file."
         # Convert matrix_ to a dict:
         matrix_dict = {}
-        for i in xrange(1, columns_and_rows):
+        for i in range(1, columns_and_rows):
             key_i = matrix_[0][i]
             matrix_dict[key_i] = {}
-            for j in xrange(1, columns_and_rows):
+            for j in range(1, columns_and_rows):
                 key_j = matrix_[0][j]
                 matrix_dict[key_i][key_j] = float(matrix_[i][j])
     
@@ -2883,13 +2883,13 @@ def cued_recall_study(stimuli, duration, distance = 135, horizontal = True, bala
     if isinstance(stimuli[0], (list, tuple)):
         return_stimuli = True
         if case == "u":
-            for i in xrange(len(stimuli)):
-                for j in xrange(2):
+            for i in range(len(stimuli)):
+                for j in range(2):
                     if not stimuli[i][j].upper():
                         stimuli[i][j] = stimuli[i][j].upper()
         elif case == "l":
-            for i in xrange(len(stimuli)):
-                for j in xrange(2):
+            for i in range(len(stimuli)):
+                for j in range(2):
                     if not stimuli[i][j].islower():
                         stimuli[i][j] = stimuli[i][j].lower()
         if randomize:
@@ -2927,7 +2927,7 @@ def cued_recall_study(stimuli, duration, distance = 135, horizontal = True, bala
                 else:
                     second = second+1
         # Create WordPair objects:
-        for i in xrange(len(stimuli)):
+        for i in range(len(stimuli)):
             item1, item2 = stimuli[i]
             if balance_targets:
                 if first and second:
@@ -2989,7 +2989,7 @@ def cued_recall_study(stimuli, duration, distance = 135, horizontal = True, bala
         scale.rect.left = screen_width//2-scale.rect.width//2
     
     # Present study phase:
-    for i in xrange(len(stimuli)):
+    for i in range(len(stimuli)):
         word_pair = stimuli[i]
         left_over_time = word_pair.study(
             duration, scale, end_after_input = end_trial_after_scale_input,
@@ -3115,7 +3115,7 @@ def rate_images(images, response_keys = NUMBERS, start_after = 0, end_after = No
     """
     assert frame_rate > 0, "frame_rate must be positive."
     screen = pygame.display.get_surface()
-    for i in xrange(len(images)):
+    for i in range(len(images)):
         image = images[i]
         image.rate(
             allowed_keys = response_keys, begin_time = start_after,
