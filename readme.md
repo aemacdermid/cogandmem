@@ -1,5 +1,5 @@
-# cogandmem 0.1.0
-author: Tyler M. Ensor (tyler.ensor@mun.ca)
+# cogandmem 0.1.1
+author: Tyler M. Ensor (tyler.ensor@mun.ca), updated to Python 3
 
 
 ## Brief Description
